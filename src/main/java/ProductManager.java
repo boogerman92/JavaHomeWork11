@@ -2,20 +2,21 @@ public class ProductManager {
     private ProductRepository repo;
 
     public ProductManager(ProductRepository repo) {
+
         this.repo = repo;
     }
 
-    public void addProduct(Product product){
-        repo.save(product);
+    public void addProduct(Product products){
+        repo.save(products);
     }
 
     public Product[] searchBy(String text) {
         Product[] result = new Product[0]; // тут будем хранить подошедшие запросу продукты
-        for (Product product: repo.getItems()) {
+        for (Product product: repo.getProduct()) {
             if (matches(product, text)) {
                 Product[] tmp = new Product[result.length + 1];
                 for (int i = 0; i < result.length; i++) {
-                    tmp[i] = result [i];
+                    tmp[i] = result[i];
                 }
                 tmp[tmp.length - 1] = product;
                 result = tmp;
@@ -25,10 +26,6 @@ public class ProductManager {
     }
 
     public boolean matches(Product product, String search) {
-        if (product.getName().contains(search)) {
-            return true;
-        } else {
-            return false;
-        }
+        return product.getName().contains(search);
     }
 }

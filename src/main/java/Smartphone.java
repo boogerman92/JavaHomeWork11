@@ -7,10 +7,12 @@ public class Smartphone extends Product {
     }
 
     public String getProducer() {
+
         return producer;
     }
 
     public void setProducer(String producer) {
+
         this.producer = producer;
     }
 
