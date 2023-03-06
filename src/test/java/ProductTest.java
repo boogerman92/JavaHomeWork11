@@ -1,5 +1,5 @@
 import org.junit.jupiter.api.Assertions;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.Test;
 
 
 public class ProductTest {
@@ -87,6 +87,7 @@ public class ProductTest {
         Assertions.assertEquals(expectedName, actualName);
         Assertions.assertEquals(expectedPrice, actualPrice);
     }
+
 
 
 }

@@ -7,10 +7,10 @@ public class ProductManagerTest {
     ProductManager manager = new ProductManager(repo);
 
     Product product1 = new Book(1, "Book 1", 1_800, "Author 1");
-    Product product2 = new Book(2, "Book 2", 1_500, "Author 2");
-    Product product3 = new Smartphone(3, "Smartphone 1", 50_000, "manufacturer 1");
-    Product product4 = new Smartphone(4, "Smartphone 2", 40_000, "manufacturer 3");
-    Product product5 = new Smartphone(5, "Smartphone 2", 40_000, "manufacturer 2");
+    Product product2 = new Smartphone(2, "Smartphone 1", 10_000, "Apple");
+    Product product3 = new Smartphone(3, "Smartphone 2", 5_000, "Samsung");
+    Product product4 = new Book(4, "Book 2", 1_000, "Author 2");
+    Product product5 = new Book(5, "Book 2", 1_000, "Author 3");
 
     @BeforeEach
     public void addProduct() {
@@ -21,15 +21,15 @@ public class ProductManagerTest {
         manager.addProduct(product5);
     }
 
-    @Test // Проверка добавления товаров в массив и вывод
-    public void shouldAddFilm() {
+    @Test
+    public void shouldAddProduct() {
         Product[] expected = {product1, product2, product3, product4, product5};
         Product[] actual = repo.getProduct();
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test // Проверка поиска товара Book
+    @Test
     public void shouldSearchByBookName() {
         Product[] actual = manager.searchBy("Book 1");
         Product[] expected = new Product[]{product1};
@@ -37,33 +37,33 @@ public class ProductManagerTest {
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test // Проверка поиска товара Book
-    public void shouldSearchByBookNameNull() {
+    @Test
+    public void shouldSearchByBookNameNegative() {
         Product[] actual = manager.searchBy("Book 4");
         Product[] expected = new Product[]{};
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test // Проверка поиска товара Smartphone
+    @Test
     public void shouldSearchBySmartphoneName() {
         Product[] actual = manager.searchBy("Smartphone 1");
-        Product[] expected = new Product[]{product3};
+        Product[] expected = new Product[]{product2};
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test // Проверка поиска товара Smartphone
-    public void shouldSearchBySmartphoneNameNull() {
+    @Test
+    public void shouldSearchBySmartphoneNameNegative() {
         Product[] actual = manager.searchBy("Smartphone 4");
         Product[] expected = new Product[]{};
 
         Assertions.assertArrayEquals(expected, actual);
     }
 
-    @Test // Проверка поиска товара Smartphone
-    public void shouldSearchBySmartphoneFewName() {
-        Product[] actual = manager.searchBy("Smartphone 2");
+    @Test
+    public void shouldSearchByBookFewName() {
+        Product[] actual = manager.searchBy("Book 2");
         Product[] expected = new Product[]{product4, product5};
 
         Assertions.assertArrayEquals(expected, actual);
