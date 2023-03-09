@@ -34,4 +34,29 @@ public class ProductRepositoryTest {
         Product[] actual = repo.getProduct();
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void shouldRemoveNullId() {
+        repo.save(product1);
+        repo.save(product2);
+        repo.save(product3);
+        repo.save(product4);
+        repo.save(product5);
+
+        Assertions.assertThrows(NotFoundException.class, () -> {repo.removeById(7);});
+    }
+
+    @Test
+    public void shouldRemoveId() {
+        repo.save(product1);
+        repo.save(product2);
+        repo.save(product3);
+        repo.save(product4);
+        repo.save(product5);
+        repo.removeById(2);
+
+        Product[] expected = {product1, product3, product4, product5};
+        Product[] actual = repo.getProduct();
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
